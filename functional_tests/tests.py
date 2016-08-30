@@ -69,12 +69,12 @@ class NewVisitorTest(LiveServerTestCase):
         # intersting than Edith...
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Buy milk')
-        inputbox.send_keys(Key.ENTER)
+        inputbox.send_keys(Keys.ENTER)
 
         # Francis gets his own unique URL
         francis_list_url = self.browser.current_url
         self.assertRegex(francis_list_url, '/lists/.+')
-        serf.assertNotEqual(francis_list_url, edith_list_url)
+        self.assertNotEqual(francis_list_url, edith_list_url)
 
         # Again, there's no trace of Edith's list
         page_text = self.browser.find_element_by_id('body').text
