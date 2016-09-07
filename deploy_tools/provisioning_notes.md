@@ -19,8 +19,21 @@ Provisioning a new site
     * see nginx.template.conf
     * replace SITENAME with, eg, staging.my-domain.com
 
+    * copy config: sed "s/SITENAME/<your_site>/g" \
+	deploy_tools/nginx.template.conf | sudo tee \
+	/etc/nginx/sites-available/<your site>
+    * activate: sudo ln -s ../sites-available/<your site> \
+	/etc/nginx/sites-enabled/<your site>
 
 ## Systemd Job (this is now used on Ubuntu by default)
+    * see gunicorn-systemd.template.service 
+    * replace SITENAME with, eg, staging.my-domain.com
+
+    * copy config: sed "s/SITENAME/<your site>/g" \
+	deploy_tools/gunicorn-systemd.template.service | sudo tee \
+	/lib/systemd/system/gunicorn-<your site>.service
+    * sudo service nginx reload
+    * sudo start gunicorn-<your site>
 
 ## Upstart Job (deprecated)
 
