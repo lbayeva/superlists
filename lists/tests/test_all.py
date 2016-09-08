@@ -5,6 +5,7 @@ from django.http import HttpRequest
 from django.template.loader import  render_to_string
 from lists.models import Item, List 
 
+
 class ListAndItemModelTest(TestCase):
     
     def test_saving_and_retrieving_items(self):
@@ -43,11 +44,15 @@ class HomePageTest(TestCase):
         self.assertEqual(found.func, home_page)
 
     def test_home_page_returns_correct_html(self):
-        request = HttpRequest()
-        response = home_page(request)
-        expected_html = render_to_string('home.html')
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'home.html')
 
-        self.assertEqual(response.content.decode(), expected_html)
+        ## this doesn't work for django 1.10
+        #request = HttpRequest()
+        #response = home_page(request)
+        #expected_html = render_to_string('home.html')
+        #self.assertEqual(response.content.decode(), expected_html)
+        
 
 class NewListTest(TestCase):
 
