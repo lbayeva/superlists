@@ -6,11 +6,11 @@ class ItemValidationTest(FunctionalTest):
            # Edith goes to the home page  and accidentally tries to submit 
            # an empty item. She hits Enter on the empty input box
            self.browser.get(self.server_url) 
-           self.get_item_input_box().send_keys('\n')
+           self.get_item_input_box().send_keys(' \n')
    
            # The home page refreshes, and there's an error message saying 
            # that list items cannot be blank 
-           error = self.browser.find_element_by_css_selector('.has-error')
+           error = self.browser.find_element_by_class_name('errorlist')
            self.assertEqual(error.text, "You can't have an empty list item")
    
            # She tries again with some text for the item, which now works
@@ -18,11 +18,11 @@ class ItemValidationTest(FunctionalTest):
            self.check_for_row_in_list_table('1: Buy milk')
    
            # Perversely, she now decides to submit a second blank list item 
-           self.get_item_input_box().send_keys('\n')
+           self.get_item_input_box().send_keys(' \n')
    
            # She recieves a similar warning on the list page
            self.check_for_row_in_list_table('1: Buy milk')
-           error = self.browser.find_element_by_css_selector('.has-error')
+           error = self.browser.find_element_by_class_name('errorlist')
            self.assertEqual(error.text, "You can't have an empty list item")
    
            # And she can correct it by filling some text in 
@@ -42,6 +42,6 @@ class ItemValidationTest(FunctionalTest):
 
            # She sees a helpful error message 
            self.check_for_row_in_list_table('1: Buy wellies')
-           error = self.browser.find_element_by_css_selector('.has_error')
+           error = self.browser.find_element_by_class_name('errorlist')
            self.assertEqual(error.text, "You've already got this in your list")
 
