@@ -2,10 +2,11 @@ from django.shortcuts import redirect, render
 from lists.models import Item,List
 from lists.forms import ItemForm, ExistingListItemForm
 from django.core.exceptions import ValidationError
+from django.views.generic import FormView, CreateView
 
-# Create your views here.
-def home_page(request):
-    return render(request, 'home.html', {'form': ItemForm()})
+class HomePageView(FormView):
+    template_name = 'home.html'
+    form_class = ItemForm
 
 def new_list(request):
     form = ItemForm(data=request.POST)
