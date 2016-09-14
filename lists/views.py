@@ -8,15 +8,24 @@ class HomePageView(FormView):
     template_name = 'home.html'
     form_class = ItemForm
 
-def new_list(request):
-    form = ItemForm(data=request.POST)
+class NewListView(CreateView):
+    form_class = ItemForm
+    template_name = 'home.html'
 
-    if form.is_valid():
+    def form_valid(self, form):
         list_ = List.objects.create()
         form.save(for_list=list_)
         return redirect(list_)
+
+def new_list(request):
+    form = ItemForm(data=request.POST)
+    if form.is_valid():
+       list_ = List.objects.create()
+       form.save(for_list=list_)
+       return redirect(list_)
     else:
-        return render(request, 'home.html', {"form": form})
+       return render(request, 'home.html', {"form": form})
+
 
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
