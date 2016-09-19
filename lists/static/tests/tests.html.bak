@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Javascript tests</title>
+	<link rel="stylesheet" href="qunit.css">
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture">
+		<form>
+			<input name="text" id="foo" />
+			<div class="has-error">Error text</div>
+		</form>
+	</div>
+
+
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="qunit.js"></script>
+	<script src="../list.js"></script>
+	<script>
+/* global $, test, equal */
+
+	/*QUnit.test("smoke test", function(assert) {
+		assert.equal( $('.has-error').is(':visible'), true);
+		$('.has-error').hide();
+		assert.equal( $('.has-error').is(':visible'), false);
+	});*/
+	function KeyLogger( target ) {
+		  this.target = target;
+		    this.log = [];
+		     
+	          var that = this;
+	          this.target.off( "keydown" ).on( "keydown", function( event ) {
+			    that.log.push( event.keyCode );
+	          });
+	}
+//	QUnit.test( "keylogger api behavior", function( assert ) {
+//		  var doc = $( document ),
+//		      keys = new KeyLogger( doc );
+//		   
+//		    // Trigger the key event
+//		    doc.trigger( $.Event( "keydown", { keyCode: 9 } ) );
+//		     
+//	            // Verify expected behavior
+//	            assert.deepEqual( keys.log, [ 9 ], "correct key was logged" );
+//	});
+//	QUnit.test( "asynchronous test: async input focus", function( assert ) {
+//	  var done = assert.async();
+//          var input = $( "#text-input" ).focus();
+//          setTimeout(function() {
+//	          assert.equal( document.activeElement, input[0], "Input was focused" ); done(); });
+//	});
+	QUnit.test("errors should be hidden on keypress", function(assert) {
+		$('#foo').trigger('keypress'); 
+		//$(':input').focus().trigger( $.Event( "keydown", { keyCode: 9 } ) );
+
+		assert.equal( $('.has-error').is(':visible'), false);
+	});
+	/*QUnit.test("errors not be hidden unless there is a keypress", function(assert) {
+		assert.equal( $('.has-error').is(':visible'), true);
+	});*/
+
+	</script>
+</body>
+</html>
+
