@@ -15,7 +15,7 @@ var initialize = function(navigator, user, token, urls) {
             deferred.done(function() { window.location.reload(); });
             deferred.fail(function() { navigator.id.logout(); });
         },
-        onlogout: function() {i
+        onlogout: function() {
             var deferred = $.post(urls.logout, {csrfmiddlewaretoken: token} )
             deferred.done(function() { window.location.reload(); });
             deferred.fail(function() { navigator.id.logout(); });
