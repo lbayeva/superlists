@@ -42,7 +42,8 @@ LOGGING = {
         'root': {'level': 'INFO'},
 }
 
-ALLOWED_HOSTS = []
+DOMAIN = "localhost"
+ALLOWED_HOSTS = [DOMAIN]
 
 
 # Application definition
