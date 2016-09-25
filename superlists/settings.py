@@ -25,6 +25,16 @@ SECRET_KEY = '#c9z^a%d4yc3=rz1%pt%pil%zkq3!qvjj0m)&-=!9+buxom9+='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+## This worked better for server side debugging
+#if DEBUG:
+#        import logging, logging.handlers
+#        logfile = "/tmp/error.log"
+#        my_logger = logging.getLogger('django_auth_ldap')
+#        my_logger.setLevel(logging.DEBUG)
+#        handler = logging.handlers.RotatingFileHandler(
+#                          logfile, maxBytes=1024 * 500, backupCount=5)
+#        my_logger.addHandler(handler)
+
 LOGGING = {
         'version': 1, 
         'disable_existing_loggers': False,
