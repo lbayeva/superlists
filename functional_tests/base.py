@@ -1,7 +1,7 @@
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.support.ui import WebDriverWait
-from .sever_tools import reset_database
+from .server_tools import reset_database
 import sys
 
 class FunctionalTest(StaticLiveServerTestCase):
