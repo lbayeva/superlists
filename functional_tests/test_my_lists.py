@@ -4,7 +4,7 @@ from .server_tools import create_session_on_server
 from .management.commands.create_session import create_pre_authenticated_session
 
 class MyListsTest(FunctionalTest):
-    
+
     def create_pre_authenticated_session(self, email):
         if self.against_staging:
             session_key = create_session_on_server(self.server_host, email)
@@ -26,6 +26,8 @@ class MyListsTest(FunctionalTest):
 
         # She goes to the home page and starts a list
         self.browser.get(self.server_url)
+        self.assert_logged_in('edith@example.com')
+
         self.get_item_input_box().send_keys('Reticulate splines\n')
         self.get_item_input_box().send_keys('Immanentize eschaton\n')
         first_list_url = self.browser.current_url
